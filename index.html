@@ -2,19 +2,37 @@
     <head>
         <script src="bower_components/knockout/dist/knockout.debug.js"></script>
         <link rel="stylesheet" href="bower_components/animate.css/animate.css" />
+        <link rel="stylesheet" href="style.css" />
         <script src="src/knockout.animate.js"></script>
+        <link href='http://fonts.googleapis.com/css?family=Roboto:100,300' rel='stylesheet' type='text/css'>
     </head>
     <body>
-        <div data-bind="animate:{ animation: ['zoomIn', 'zoomOut'], state: animateObject, handler: function(){}}">AAA</div>
+        <div class="holder">
+            <div data-bind="animate:{ animation: animation, state: animateObject, handler: function(){}}">
+                <span class="title">knockout.animate</span>
+            </div>
+            <div class="description">Animate.css custom binding for Knockout.js</div>
+            <div class="code">
+                <code>
+                    <span>&lt;div</span>
+                    <span class="important">data-bind="animate:{ animation:[
+                        <span data-bind="text: animation"></span>
+                        ], state:
+                        <span data-bind="text: animateObject"></span>
+                        }"</span>
+                    <span>&gt; &lt;/div&gt;</span>
+                </code>
+            </div>
+        </div>
 
         <script>
             function Viewmodel(){
                 var self = this;
 
-                this.animateObject = ko.observable(null);
+                this.animateObject = ko.observable(true);
+                this.animation = ko.observableArray(['zoomIn', 'zoomOut']);
 
                 setInterval(function(){
-                    console.log('+');
                     self.animateObject(!self.animateObject());
                 }, 2000);
             };

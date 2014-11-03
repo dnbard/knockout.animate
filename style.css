@@ -1,0 +1,48 @@
+body{
+    font-family: Roboto;
+}
+
+.title{
+    color: #f35626;
+    background-image: -webkit-linear-gradient(92deg,#f35626,#feab3a);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -webkit-animation: hue 60s infinite linear;
+
+    display: inline-block;
+    margin: auto;
+
+    font-size: 6rem;
+    line-height: 1;
+}
+
+.holder{
+    text-align: center;
+    margin-top: 250px;
+}
+
+.description{
+    font-size: 18pt;
+}
+
+@-webkit-keyframes hue {
+  from {
+    -webkit-filter: hue-rotate(0deg);
+  }
+
+  to {
+    -webkit-filter: hue-rotate(-360deg);
+  }
+}
+
+.code{
+    background-color: #121212;
+    color: white;
+    font-size: 13pt;
+    padding: 5px;
+    border-radius: 0.5em;
+}
+
+.important{
+    color: #e3e658;
+}
