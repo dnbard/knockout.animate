@@ -8,9 +8,9 @@
     }
 }(function (ko, exports) {
     var animations = ["bounce", "flash", "pulse", "rubberBand", "shake", "swing", "tada", "wobble", "bounceIn", "bounceInDown", "bounceInLeft", "bounceInRight", "bounceInUp", "bounceOut", "bounceOutDown", "bounceOutLeft", "bounceOutRight", "bounceOutUp", "fadeIn", "fadeInDown", "fadeInDownBig", "fadeInLeft", "fadeInLeftBig", "fadeInRight", "fadeInRightBig", "fadeInUp", "fadeInUpBig", "fadeOut", "fadeOutDown", "fadeOutDownBig", "fadeOutLeft", "fadeOutLeftBig", "fadeOutRight", "fadeOutRightBig", "fadeOutUp", "fadeOutUpBig", "flip", "flipInX", "flipInY", "flipOutX", "flipOutY", "lightSpeedIn", "lightSpeedOut", "rotateIn", "rotateInDownLeft", "rotateInDownRight", "rotateInUpLeft", "rotateInUpRight", "rotateOut", "rotateOutDownLeft", "rotateOutDownRight", "rotateOutUpLeft", "rotateOutUpRight", "hinge", "rollIn", "rollOut", "zoomIn", "zoomInDown", "zoomInLeft", "zoomInRight", "zoomInUp", "zoomOut", "zoomOutDown", "zoomOutLeft", "zoomOutRight", "zoomOutUp"],
-        baseAnimateClass = "animated";
+        baseAnimateClass = "animated",
+        pfx = ["webkit", "moz", "MS", "o", ""];
 
-    var pfx = ["webkit", "moz", "MS", "o", ""];
     function addPrefixedEvent(element, type, callback) {
         for (var p = 0; p < pfx.length; p++) {
             if (!pfx[p]) type = type.toLowerCase();
@@ -59,7 +59,31 @@
     }
 
     ko.bindingHandlers.animate = {
-        update: function(element, valueAccessor) {
+        init: function(element, valueAccessor){
+            var data = ko.unwrap(valueAccessor()),
+                animation, state, toggle, animationOn, animationOff, handler;
+
+            if (!data.animation){
+                throw new Error('Animation property must be defined');
+            }
+
+            if (!data.state){
+                throw new Error('State property must be defined');
+            }
+
+            animation = ko.unwrap(data.animation);
+            animationOn = typeof animation === 'object' ? animation[0] : animation;
+            animationOff = typeof animation === 'object' ? animation[1] : animation;
+
+            if (animationOn && animations.indexOf(animationOn) === -1){
+                throw new Error('Invalid first animation');
+            }
+
+            if (animationOff && animations.indexOf(animationOff) === -1){
+                throw new Error('Invalid second animation');
+            }
+        },
+        update: function(element, valueAccessor){
             var data = ko.unwrap(valueAccessor()),
                 animation, state, toggle, animationOn, animationOff, handler;
 
