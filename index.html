@@ -1,7 +1,7 @@
 <html>
     <head>
-        <script src="bower_components/knockout/dist/knockout.debug.js"></script>
-        <link rel="stylesheet" href="bower_components/animate.css/animate.css" />
+        <script type="text/javascript" src="http://cdn.jsdelivr.net/knockout/3.2.0/knockout.js"></script>
+        <link rel="stylesheet" href="http://cdn.jsdelivr.net/animatecss/3.2.0/animate.css">
         <link rel="stylesheet" href="style.css" />
         <script src="src/knockout.animate.js"></script>
         <link href='http://fonts.googleapis.com/css?family=Roboto:100,300' rel='stylesheet' type='text/css'>
@@ -25,19 +25,7 @@
             </div>
         </div>
 
-        <script>
-            function Viewmodel(){
-                var self = this;
 
-                this.animateObject = ko.observable(true);
-                this.animation = ko.observableArray(['zoomIn', 'zoomOut']);
-
-                setInterval(function(){
-                    self.animateObject(!self.animateObject());
-                }, 2000);
-            };
-
-            ko.applyBindings(new Viewmodel());
-        </script>
+        <script type="text/javascript" src="main.js"></script>
     </body>
 </html>
