@@ -37,8 +37,8 @@ Then add next data-binding to an element:
 
 That's it! You've got a CSS animated element. Super!
 
-Use observables to control animation
-____________________________________
+Use observable to control animation
+-----------------------------------
 
 You can control when animation is going to happen by assigning `Knockout Observable` to `state` field:
 
@@ -57,7 +57,7 @@ ko.applyBindings(new Viewmodel());
 Animation will be played when observable become `true`.
 
 Assign `in` and `out` states and toggle between them
-____________________________________________________
+----------------------------------------------------
 
 You can add `in` and `out` animation this way:
 
@@ -68,7 +68,7 @@ You can add `in` and `out` animation this way:
 First animation will be played when `state` field become `true` and second when `false`.
 
 Assign custom handler on state change
-_____________________________________
+-------------------------------------
 
 ```html
 <div data-bind="animate:{ animation: 'zoomIn', state: state, handler: handler"></div>
