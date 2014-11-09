@@ -1,12 +1,18 @@
 <html>
     <head>
-        <script src="bower_components/knockout/dist/knockout.debug.js"></script>
-        <link rel="stylesheet" href="bower_components/animate.css/animate.css" />
+        <title>knockout.animate</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="initial-scale=1, minimal-ui">
+
+
+        <script type="text/javascript" src="http://cdn.jsdelivr.net/knockout/3.2.0/knockout.js"></script>
+        <link rel="stylesheet" href="http://cdn.jsdelivr.net/animatecss/3.2.0/animate.css">
         <link rel="stylesheet" href="style.css" />
         <script src="src/knockout.animate.js"></script>
         <link href='http://fonts.googleapis.com/css?family=Roboto:100,300' rel='stylesheet' type='text/css'>
     </head>
     <body>
+        <a href="https://github.com/dnbard/knockout.animate"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/38ef81f8aca64bb9a64448d0d70f1308ef5341ab/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f6461726b626c75655f3132313632312e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png"></a>
         <div class="holder">
             <div data-bind="animate:{ animation: animation, state: animateObject, handler: function(){}}">
                 <span class="title">knockout.animate</span>
@@ -23,21 +29,26 @@
                     <span>&gt; &lt;/div&gt;</span>
                 </code>
             </div>
+            <div class="controls">
+                <select data-bind="foreach: animations, value: animationEntrance">
+                    <option data-bind="text: $data"></option>
+                </select>
+
+                <select data-bind="foreach: animations, value: animationExit">
+                    <option data-bind="text: $data"></option>
+                </select>
+
+                <button data-bind="click: toggleState">Animate it</button>
+            </div>
+            <hr>
+            <div>
+                Download
+                <a href="https://raw.githubusercontent.com/dnbard/knockout.animate/master/src/knockout.animate.js">knockout.animate</a>
+                or
+                <a href="https://github.com/dnbard/knockout.animate" target="_blank">View on GitHub</a></div>
         </div>
 
-        <script>
-            function Viewmodel(){
-                var self = this;
 
-                this.animateObject = ko.observable(true);
-                this.animation = ko.observableArray(['zoomIn', 'zoomOut']);
-
-                setInterval(function(){
-                    self.animateObject(!self.animateObject());
-                }, 2000);
-            };
-
-            ko.applyBindings(new Viewmodel());
-        </script>
+        <script type="text/javascript" src="main.js"></script>
     </body>
 </html>
