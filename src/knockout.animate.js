@@ -48,7 +48,7 @@
 
         var eventSubscription = null;
 
-        removeCallback = function(event){
+        eventSubscription = function(event){
             removePrefixedEvent(element, "AnimationEnd", eventSubscription);
 
             removeClass(element, baseAnimateClass);
