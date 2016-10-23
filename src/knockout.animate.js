@@ -18,10 +18,10 @@
         }
     }
 
-    function removePrefixedEvent(element, type) {
+    function removePrefixedEvent(element, type, callback) {
         for (var p = 0; p < pfx.length; p++) {
             if (!pfx[p]) type = type.toLowerCase();
-            element.removeEventListener(pfx[p]+type);
+            element.removeEventListener(pfx[p]+type, callback);
         }
     }
 
@@ -46,8 +46,10 @@
         addClass(element, baseAnimateClass);
         addClass(element, animation);
 
-        addPrefixedEvent(element, "AnimationEnd", function(event){
-            removePrefixedEvent(element, "AnimationEnd");
+        var eventSubscription = null;
+
+        eventSubscription = function(event){
+            removePrefixedEvent(element, "AnimationEnd", eventSubscription);
 
             removeClass(element, baseAnimateClass);
             removeClass(element, animation);
@@ -55,7 +57,9 @@
             if (typeof callback === 'function'){
                 callback(event, state);
             }
-        });
+        };
+
+        addPrefixedEvent(element, "AnimationEnd", eventSubscription);
     }
 
     ko.bindingHandlers.animate = {
